@@ -1,17 +1,27 @@
-/* Remove all default spacing */
 html, body {
   margin: 0;
   padding: 0;
 }
 
-/* Ensure container takes full width */
 .container {
   width: 100%;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
 }
 
-/* Make images responsive and stacked */
 .container img {
-  display: block;      /* removes inline gaps */
-  width: 100%;         /* scale to screen width */
-  height: auto;        /* keep aspect ratio (no cropping) */
+  display: block;
+  width: 100%;
+  height: auto;
+  scroll-snap-align: start;
+}
+
+@media (max-width: 768px) {
+  .container img {
+    width: 100%;
+    height: auto;
+    scroll-snap-align: center;
+    max-height: 100vh;
+    object-fit: contain;
+  }
 }
