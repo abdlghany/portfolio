@@ -16,11 +16,14 @@
 
     <div class="section bg-1">
       <div class="video-wrapper" style="width: 30%; top: 70%; left: 50%;">
-        <div class="tap-overlay" onclick="playVideo(this)"></div>
+        <div class="tap-overlay" onclick="playVideo(this)">
+           <div class="play-button"></div>
+        </div>
         <iframe 
-          src="https://www.youtube.com/embed/WqC2rXgWntQ"
+          src="https://www.youtube.com/embed/WqC2rXgWntQ?enablejsapi=1&playsinline=1"
           title="2026 DEMO REEL"
           frameborder="0"
+          allow="autoplay; encrypted-media"
           allowfullscreen>
         </iframe>
       </div>
@@ -150,14 +153,23 @@
     <div class="section bg-6"></div>
   </div>
 </body>
+
 <script>
-  function playVideo(el) {
-    const iframe = el.parentElement.querySelector("iframe");
-    iframe.contentWindow.postMessage(
-      '{"event":"command","func":"playVideo","args":""}',
-      '*'
-    );
-    el.style.display = "none";
-  }
+function playVideo(el) {
+  const wrapper = el.parentElement;
+  const iframe = wrapper.querySelector("iframe");
+
+  iframe.contentWindow.postMessage(
+    JSON.stringify({
+      event: "command",
+      func: "playVideo",
+      args: []
+    }),
+    "*"
+  );
+
+  el.remove();
+}
 </script>
+
 </html>
